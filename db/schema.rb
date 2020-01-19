@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 2020_01_19_020132) do
     t.string "provider"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "projects_count"
+    t.integer "projects_count", default: 0
   end
 
 end

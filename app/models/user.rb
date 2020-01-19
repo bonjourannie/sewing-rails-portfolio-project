@@ -8,4 +8,26 @@ class User < ApplicationRecord
     validates_uniqueness_of :email
     validates :password, presence: true, :length => {minimum: 6}
 
+    def self.from_omniauth(auth) 
+        user = where(provider: auth.provider, uid: auth.uid).first 
+        unless user 
+          user = where(email: auth.info.email).first_or_initialize 
+          user.email = auth.info.email
+          user.name = auth.info.name 
+          user.image = auth.info.image 
+          user.password = Devise.friendly_token[0,20]
+          (user.save!(validate: false))
+        end
+        user
+      end
+
+      def self.most_recipes
+        User.order("users.recipes_count DESC")
+      end
+    
+      def auth
+        request.env["omniauth.auth"]
+      end
+
+
 end

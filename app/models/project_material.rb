@@ -1,0 +1,2 @@
+class ProjectMaterial < ApplicationRecord
+end

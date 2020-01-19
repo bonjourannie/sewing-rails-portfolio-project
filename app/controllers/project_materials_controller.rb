@@ -1,0 +1,2 @@
+class ProjectMaterialsController < ApplicationController
+end

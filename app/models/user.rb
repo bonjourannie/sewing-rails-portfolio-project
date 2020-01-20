@@ -21,8 +21,8 @@ class User < ApplicationRecord
         user
       end
 
-      def self.most_recipes
-        User.order("users.recipes_count DESC")
+      def self.most_projects
+        User.order("users.projects_count DESC")
       end
     
       def auth

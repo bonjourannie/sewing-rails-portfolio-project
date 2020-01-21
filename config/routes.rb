@@ -9,10 +9,14 @@ Rails.application.routes.draw do
   resources :project_materials
   resources :materials
   resources :categories
+
+  resources :users do 
+    collection do 
+      get :most_recipes 
+    end
+  end
   
-  get "auth/facebook/callback" =>  'sessions#facebook'
-  get "/mostprojects" => "welcome#most_projects"
-  get "/most_projects" => "projects#most_projectss"
-  #come back to this
   
+  get '/auth/google_oauth2/callback' => 'sessions#create_with_google'
+
 end

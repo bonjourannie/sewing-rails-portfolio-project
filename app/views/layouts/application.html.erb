@@ -7,7 +7,12 @@
 
    </head>
 
-  <body>
-    <%= yield %>
-  </body>
+   <body>
+   <%=render partial: 'layouts/navigation' %>
+   <%= render partial: 'layouts/errors' %>
+
+   <%= yield %>
+
+ </body>
+ <%= render partial: 'layouts/footer' %>
 </html>

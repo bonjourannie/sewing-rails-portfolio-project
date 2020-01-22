@@ -1,0 +1,8 @@
+<h1>See All Projects</h1>
+<h5><%= link_to "Project with Most Materials", projects_most_materials_path %></h5>
+
+<ul>
+  <% Project.all.each do |project| %>
+    <li><%= link_to project.name, project_path(project) %><br></br></li>
+  <% end %>
+</ul>

@@ -2,7 +2,8 @@ class User < ApplicationRecord
   has_many :projects 
 
   has_secure_password 
-  require 'securerandom'
+  #require 'securerandom'
+  #I don't think I need this
 
   validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
   validates_presence_of :name, :email

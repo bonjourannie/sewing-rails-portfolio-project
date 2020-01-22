@@ -1,0 +1,23 @@
+<div class="card-header">
+  <h4><%= @project.name %></h4>
+</div>
+
+<div>
+  <a href="#" class="js-prev" data-id="<%=@project.id%>">...Previous Project</a>
+  <a href="#" class="js-next" data-id="<%=@project.id%>">Next Project...</a>
+  <div class="projectMaterials"><h3>Materials:</h3>
+    <ul class="materialsList"><% @project.materials.each do |material| %>
+    <li><%= link_to material.name, material_path(material) %></li>
+    <% end %>
+  </div>
+  </ul>
+
+  <div><h3>Instructions:</h3>
+  <p class="projectInstructions"><%= @project.instructions %></p>
+  </div>
+  <h3>Categories:</h3>
+    <ul class="projectCategories"><% @project.categories.each do |category| %>
+      <li><%=link_to category.name, category_path(category) %></li>
+    </ul><% end %>
+
+</div>

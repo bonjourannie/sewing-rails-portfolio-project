@@ -13,7 +13,7 @@ class Project < ApplicationRecord
             material_name = material_attribute[:name]
             material = Material.find_or_create_by(name: material_name)
             if !material_name.empty? && material
-               self.materials.update << material unless self.material.include?(material)
+               self.materials << material unless self.material.include?(material)
             end
             self.save
           end

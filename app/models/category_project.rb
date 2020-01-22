@@ -1,5 +1,5 @@
 class CategoryProject < ApplicationRecord
-    has_many :category_projects
+    belongs_to :category
     has_many :projects, through: :category_projects
 
     validates :name, presence: true

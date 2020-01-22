@@ -8,13 +8,15 @@ class Project < ApplicationRecord
     validates_presence_of :name, :materials, :instructions
     validates_uniqueness_of :name
 
-    def materials_attributes=(projects_attributes)
-        material_name = material_name[:name]
-        material = Material.find_or_create_by(name: material_name)
-        if !material_name.empty? && material
-            self.materials << material unless self.materials.include?(material)
-        end 
-        self.save
+    def materials_attributes=(materials_attributes)
+        materials_attributes.values.each do |material_attribute|
+            material_name = material_attribute[:name]
+            material = Material.find_or_create_by(name: material_name)
+            if !material_name.empty? && material
+               self.materials.update << material unless self.material.include?(material)
+            end
+            self.save
+          end
     end
 
     def categories_attributes=(categories_attributes)

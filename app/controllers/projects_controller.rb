@@ -3,10 +3,10 @@ class ProjectsController < ApplicationController
     
     def new 
         if current_user
-            @project = current_user.projects.build
+            @project = Project.new 
             4.times{@project.materials.build}
         else 
-            refirect_to root_path
+            redirect_to root_path
             flash[:notice] = "Please log in to create a project"
         end
     end
@@ -16,13 +16,18 @@ class ProjectsController < ApplicationController
     end
     
     def create 
-        @project = Project.new(project_params)
-        if project.save
-            refirect_to @project
-            flash[:notice] = "your project was successfully created"
-        else 
-            refirect_to new_project_path 
-            flash[:notice] = @project.errors.full_message
+        @project = current_user.projects.build(project_params)
+        if @project.save
+            redirect_to project_path(@project.id), notice: "Project Successfully Created" 
+    else 
+      render :new
+    end
+    end
+
+    def show 
+        if !logged_in?
+            redirect_to root_path 
+            flash[:notice] = "you must be logged in to see projects"
         end
     end
 

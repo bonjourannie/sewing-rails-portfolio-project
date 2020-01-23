@@ -1,0 +1,10 @@
+<%= form_for @project do |f| %>
+
+    <%= f.fields_for :materials, @project.materials.build do |materials_field| %>
+        <br><%= f.label "Material Name", :class => "h4" %>
+         <%= materials_field.text_field :name %>
+     <% end %>
+  
+       <%= f.submit :class =>"btn btn-primary", :value => "Add" %>
+    <% end %>
+  </div>

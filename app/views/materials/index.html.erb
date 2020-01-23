@@ -1,0 +1,14 @@
+<div>
+  <h2>All Materials</h2>
+  <p><%= link_to 'Sort by Most Popular',materials_sort_by_popularity_path %></p>
+  <p><%= link_to 'Sort by Name', materials_sort_abc_path %></p>
+  <ul class="list-group">
+    <% @materials.each do |material| %>
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <%= link_to material.name, material_path(material) %>
+        <span class="badge badge-primary badge-pill"><%= pluralize(ingredient.recipes.count, "recipe") %></span>
+      </li>
+    <% end %>
+  </ul>
+  </div>
+</div>

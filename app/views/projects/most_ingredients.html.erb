@@ -1,0 +1,7 @@
+<h3><%= @project.name %></h3>
+<h4><%= @project.materials.count %> materials</h4>
+<ul>
+  <% @project.materials.each do |material| %>
+<li><%= material.name %></li>
+<% end %>
+</ul>

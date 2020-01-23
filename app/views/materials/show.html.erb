@@ -1,0 +1,6 @@
+<h2><%= @material.name %></h2>
+<ul>
+  <% @material.projects.each do |project| %>
+    <li><%= link_to project.name, project_path(project) %></li>
+  <%end %>
+</ul>

@@ -4,7 +4,7 @@ class MaterialsController < ApplicationController
     end
 
     def show 
-        @materials = Material.find(params[:id])
+        @material = Material.find(params[:id])
     end
 
     def sort_by_popularity 

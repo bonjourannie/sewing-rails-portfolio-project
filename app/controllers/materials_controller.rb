@@ -1,6 +1,6 @@
 class MaterialsController < ApplicationController
     def index 
-        @materials = Materials.all 
+        @materials = Material.all 
     end
 
     def show 
@@ -16,6 +16,6 @@ class MaterialsController < ApplicationController
         @materials = Material.sort_ABC 
         render :index 
     end
-     
+
 
 end

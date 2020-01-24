@@ -2,9 +2,9 @@ class SessionsController < ApplicationController
     def new 
     end
 
-    def create_with_google
+    def create_with_facebook
         user_info = request.env["omniauth.auth"]
-        @user = User.google_login(user_info)
+        @user = User.facebook_login(user_info)
         session[:user_id] = @user.id
         redirect_to root_path
         flash[:alert] = "Welcome! You are now logged in!"
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
             redirect_to root_url
             flash[:alert] = "Welcome! You are now logged in!"
         else
-            flash[:error] = "User not correct or not found"
+            flash[:error] = "User not found, please check for misspelling and try again or sign up"
             render 'new'
         end
     end
@@ -30,9 +30,9 @@ class SessionsController < ApplicationController
     
     private
     
-      def auth
+    def auth
         request.env["omniauth.auth"]
-      end
+    end
 
 
 end

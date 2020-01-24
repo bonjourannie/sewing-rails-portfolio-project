@@ -1,5 +1,5 @@
 <% if @projects.blank? %>
-  <!-- <h4>There are no projects containing the material <%= params[:search] %>.</h4> -->
+  <h4>There are no projects containing the material <%= params[:search] %>.</h4>
   
   <h4>There are no projects yet.</h4>
     <% if !logged_in? %>
@@ -11,4 +11,3 @@
 <% else %>
   <%= render 'all_projects' %>
 <% end %>
-<! this logic should probably go somewhere else >

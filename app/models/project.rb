@@ -25,7 +25,7 @@ class Project < ApplicationRecord
     def categories_attributes=(categories_attributes)
         categories_attributes.values.each do |category_attributes|
             if !categories_attribute[:name].empty? && category = Category.find_or_create_by(categories_attribute)
-                self.categories << category 
+                self.categories.update(categories_attributes) 
             end
         end
     end

@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   resources :projects
   resources :project_materials
+  resources :sessions 
+  
   resources :materials, only: [:index, :show]
   
   resources :categories do 

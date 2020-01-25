@@ -2,9 +2,9 @@ class SessionsController < ApplicationController
     def new 
     end
 
-    def create_with_facebook
+    def create_with_github
         user_info = request.env["omniauth.auth"]
-        @user = User.facebook_login(user_info)
+        @user = User.github_login(user_info)
         session[:user_id] = @user.id
         redirect_to root_path
         flash[:alert] = "Welcome! You are now logged in!"

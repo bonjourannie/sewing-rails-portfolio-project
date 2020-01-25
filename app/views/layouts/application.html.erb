@@ -10,7 +10,8 @@
    <body>
    <%=render partial: 'layouts/navigation' %>
    <%= render partial: 'layouts/errors' %>
-
+   <p class="notice"><%= notice %></p>
+   <p class="alert"><%= alert %></p>
    <%= yield %>
 
  </body>

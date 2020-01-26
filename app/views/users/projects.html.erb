@@ -1,0 +1,10 @@
+<h3><%= @user.name %> </h3>
+
+<% if !@user.projects.empty? %>
+  <ul> <% @user.projects.each do |project| %>
+    <li><%= link_to project.name, project_path(project) %> </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><%= "This user has no projects yet." %></p>
+<% end %>

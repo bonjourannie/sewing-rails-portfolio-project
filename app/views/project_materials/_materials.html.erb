@@ -18,30 +18,30 @@
   <% end %>
 </div>
 
-<h4><a href="#" class="new-ingredient">+ Add New Ingredient to Recipe</a></h4>
-<div class="new-ingredient-form"></div>
+<h4><a href="#" class="new-material">+ Add New Material to Project</a></h4>
+<div class="new-material-form"></div>
 
-<p><%= link_to "Back to Recipe", recipe_path(@recipe) %></p>
+<p><%= link_to "Back to Project", project_path(@project) %></p>
 
 <script type="text/javascript">
 $(function () {
 
-function Ingredient(name, notes, recipe_id) {
+function Material(name, notes, project_id) {
   this.name = name
   this.notes = notes
-  this.recipe_id = recipe_id
+  this.project_id = project_id
 }
 
-Ingredient.prototype.formatIngredient = function() {
-  ingredientHTML = `<li>${this.name}</li><p>New format</p>`
-  return ingredientHTML
+Material.prototype.formatMaterial = function() {
+  materialHTML = `<li>${this.name}</li><p>New format</p>`
+  return materialHTML
 }
 
-  $(".new-ingredient").on("click", function() {
-    $('.new-ingredient-form').html(` <%= render partial: 'new_ingredient' %> `)
-    $('.edit_recipe').on("submit", function(ingredient) {
+  $(".new-material").on("click", function() {
+    $('.new-material-form').html(` <%= render partial: 'new_material' %> `)
+    $('.edit_project').on("submit", function(material) {
       debugger
-      $('.ingredients-list').append(ingredientHTML);
+      $('.materials-list').append(materialHTML);
       event.preventDefault();
     });
     event.preventDefault();
@@ -53,10 +53,10 @@ Ingredient.prototype.formatIngredient = function() {
 
 $(function () {
   $(".new-note").on("click", function() {
-    var recipeIng = $(".new-note").attr("recipe-ing-id");
-    var newNoteForm = ".new-note-form-" + recipeIng
-    var recipeIngredient = `#{@recipe_ingredient}`
-    $(newNoteForm).html(` <%= render partial: 'new_note', :recipe_ingredient => `#{@recipe_ingredient}` %>`)
+    var projectIng = $(".new-note").attr("project-ing-id");
+    var newNoteForm = ".new-note-form-" + projectIng
+    var projectMaterial = `#{@project_material}`
+    $(newNoteForm).html(` <%= render partial: 'new_note', :project_material => `#{@project_material}` %>`)
     event.preventDefault();
   });
 });

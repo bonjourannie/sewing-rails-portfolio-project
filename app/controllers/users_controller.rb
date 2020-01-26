@@ -19,7 +19,7 @@ class UsersController < ApplicationController
         end
     end
     
-    def recipes
+    def projects
         @user = User.find(params[:user_id])
     end
     
@@ -28,13 +28,12 @@ class UsersController < ApplicationController
         if @user === current_user
           render :show
         else
-          redirect_to "/users/#{@user.id}/recipes"
+          redirect_to "/users/#{@user.id}/projects"
         end
     end
     
-    def most_recipes
-        @users = User.most_recipes
-        render json: @users, status: 200
+    def most_projects
+        @users = User.most_projects
     end
     
     

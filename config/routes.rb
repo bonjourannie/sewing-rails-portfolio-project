@@ -1,10 +1,7 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
+  
   root 'users#welcome'
-
-  get 'signup', to: 'users#new', as: 'signup'
-  get 'login', to: 'sessions#new', as: 'login'
-  get 'logout', to: 'sessions#destroy', as: 'logout'
 
   get '/projects/most_materials', to: 'projects#most_materials', as: "projects_most_materials"
   get '/projects/:id/materials', to: 'project_materials#index', as: "project_material_index"

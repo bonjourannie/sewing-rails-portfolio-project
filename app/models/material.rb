@@ -4,7 +4,7 @@ class Material < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   scope :sort_by_popularity, -> { joins(:projects)
-    .select("projects.*", "COUNT(projects.id) AS projects_count")
+    .select("materials.*", "COUNT(projects.id) AS projects_count")
     .group(:material_id)
     .order("projects_count DESC")
   }

@@ -1,14 +1,26 @@
 class SessionsController < ApplicationController 
     def new 
     end
-
+    
     def create_with_github
-        user_info = request.env["omniauth.auth"]
-        @user = User.github_login(user_info)
-        session[:user_id] = @user.id
-        redirect_to root_path
-        flash[:alert] = "Welcome! You are now logged in!"
-    end
+        @user = User.from_omniauth(request.env["omniauth.auth"])
+        if @user.persisted?
+          sign_in_and_redirect @user, event: :authentication 
+          set_flash_message(:notice, :success, kind: "Github") if is_navigational_format?
+        else 
+          session["devise.github_data"] = request.env["omniauth.auth"]
+          redirect_to new_user_registration_url
+        end
+      end
+    
+      
+      
+    #     user_info = request.env["omniauth.auth"]
+    #     @user = User.github_login(user_info)
+    #     session[:user_id] = @user.id
+    #     redirect_to root_path
+    #     flash[:alert] = "Welcome! You are now logged in!"
+    # end
     
     def create
         user = User.find_by(email: params[:email])
@@ -30,9 +42,10 @@ class SessionsController < ApplicationController
     
     private
     
-    def auth
-        request.env["omniauth.auth"]
-    end
+    # I don't think I need this
+    # def auth
+    #     request.env["omniauth.auth"]
+    # end
 
 
 end

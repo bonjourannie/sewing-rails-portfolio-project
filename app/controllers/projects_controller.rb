@@ -19,9 +19,9 @@ class ProjectsController < ApplicationController
         @project = current_user.projects.build(project_params)
         if @project.save
             redirect_to project_path(@project.id), notice: "Project Successfully Created" 
-    else 
-      render :new
-    end
+        else 
+            render :new
+        end
     end
 
     def show 

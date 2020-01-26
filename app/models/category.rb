@@ -5,7 +5,7 @@ class Category < ApplicationRecord
     validates_uniqueness_of :name 
 
     scope :sort_by_popularity, -> { joins(:projects)
-    .select("categories.*", "COUNT(projects.id) AS projects_count")
+    .select("catergories.*", "COUNT(projects.id) AS projects_count")
     .group(:category_id)
     .order("projects_count DESC")
   }

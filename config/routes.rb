@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get '/materials/sort_abc', to: 'materials#sort_ABC'
   get '/materials/sort_by_popularity', to: 'materials#sort_bypopularity'
 
-  get '/auth/github/callback' => 'sessions#create_with_github'
+  get '/auth/github' => 'sessions#create_with_github'
 
   resources :projects
   resources :project_materials

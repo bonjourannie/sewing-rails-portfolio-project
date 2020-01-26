@@ -1,0 +1,9 @@
+<%= form_for @project_material do |f| %>
+    <%= f.text_area :notes  %>
+    <br>
+  
+    <%= @project_material.id %>
+    <%= link_to "Delete", :project_material, method: :delete, data: { confirm: "Are you sure?" } %>
+  
+    <%= f.submit :class =>"btn btn-primary", :value => "Add/Update Note" %>
+  <% end %>

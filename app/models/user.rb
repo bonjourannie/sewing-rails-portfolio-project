@@ -19,7 +19,6 @@ class User < ApplicationRecord
         user = where(email: auth.info.email).first_or_initialize 
         user.email = auth.info.email
         user.name = auth.info.name 
-        user.image = auth.info.image 
         user.password = Devise.friendly_token[0,20]
         (user.save!(validate: false))
       end

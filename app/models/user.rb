@@ -5,14 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :omniauthable, omniauth_providers: %i[github]
   has_many :projects 
 
-  #has_secure_password 
-  
-
-  # validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
-  # validates_presence_of :name, :email
-  # validates_uniqueness_of :email
-  # validates :password, presence: true, :length => {minimum: 6}
-
   def self.from_omniauth(auth)
     find_or_create_by(email: auth['info']['email']) do |u|
        u.name = auth['info']['name']

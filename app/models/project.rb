@@ -8,14 +8,23 @@ class Project < ApplicationRecord
     validates_presence_of :name, :materials, :instructions
     validates_uniqueness_of :name
 
-    def materials_attributes=(material)
-        self.material = Materials.find_or_create_by(name: category[:name])
-        self.materials.update(material)
-    end
+    def project_materials_attributes=(project_materials_hash)
+		project_materials_hash.values.each do |project_material|
+			project = Project.find_by(id: project_material[:project_id])
+			proj_material = ProjectMaterial.find_by(id: project_material[:id])
+			material = Material.find_by(id: project_material[:material_attributes][:id])
+			if project && proj_material && material
+				proj_material.update(notes: project_material[:notes])
+				material.update(name: project_material[:material_attributes][:name])
+			else
+				self.project_materials.build(project_material)
+			end
+		end
+	end
 
     def categories_attributes=(categories_attributes)
-        categories_attributes.values.each do |category_attributes|
-            if !categories_attribute[:name].empty? && category = Category.find_or_create_by(categories_attribute)
+        categories_attributes.values.each do |category_attribute|
+            if !category_attribute[:name].empty? && category = Category.find_or_create_by(category_attribute)
                 self.categories.update(categories_attributes) 
             end
         end

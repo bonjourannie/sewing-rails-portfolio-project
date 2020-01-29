@@ -1,24 +1,39 @@
 class ProjectMaterialsController < ApplicationController
-    def edit
-        if @project.user == current_user
-          5.times{@project.materials.build}
-        else
-          redirect_to root_path
-          flash[:notice] = "You can only edit your own projects."
-        end
+    before_action :set_project_material, only: [:show, :destroy]
+
+    def index
+      @project = Project.find(params[:id])
+    end
+  
+    def new
+      @project = Project.find_by(params[:id])
+    end
+  
+    def show
+    end
+  
+    def create
     end
     
     def update
-        @project.update(project_params)
-        if @project.save
-          render :show
-        else
-          render :edit
-        end
+      @project_material = ProjectMaterial.find(params[:id])
+      @project = @project_material.project
+      @project_material.update(project_material_params)
+      
     end
-    
-    def most_materials
-        project = Project.most_materials
-        @project = Project.find(proejct[0].id)
+  
+    def destroy
+      @project_materialt.destroy
+      redirect_to project_path(@project_material.project)
+    end
+  
+    private
+  
+    def set_project_material
+      @project_material = ProjectMaterial.find(params[:id])
+    end
+  
+    def project_material_params
+      params.require(:project_material).permit(:notes)
     end
 end

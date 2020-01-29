@@ -1,9 +1,7 @@
-<h1> <%= @category.name %> </h1>
-<ul>
-<% @category.projects.each do |project| %>
-  <li><%= link_to project.name, project_path(project) %></li>
+<%= form_for @category do |f| %>
+
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.submit %>
 <% end %>
-</ul>
-
-
-<p><%= link_to 'See All Categories', categories_path %></p>

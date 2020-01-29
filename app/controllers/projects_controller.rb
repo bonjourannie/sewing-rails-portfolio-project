@@ -57,14 +57,14 @@ class ProjectsController < ApplicationController
         end
     end
     
-      def most_materials
+    def most_materials
         project = Project.most_materials
         @project = Project.find(project[0].id)
-      end
+    end
 
     private 
     def project_params
-        params.require(:project).permit(:name, :materials, :user_id, :instructions, materials_attributes_hash: [:name, :id], categories_attributes: [:name], category_ids: [])
+        params.require(:project).permit(:name, :user_id, :instructions, materials_attributes: [:name, :id], categories_attributes: [:name], category_ids: [])
     end
 
     def set_project

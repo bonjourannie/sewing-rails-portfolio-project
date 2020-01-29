@@ -3,11 +3,4 @@
   <p><%= link_to 'Sort by Name',sort_ABC_categories_path %></p>
   
 
-  <p><a href ="#" class="add-new-category">+ New Category</a></p>
-  <div id = "new-category-container" style="display:none">
-    <%= form_for @category do |f| %>
-      <%= f.label "Name", :class => "h4" %>
-      <%= f.text_field :name %>
-      <%= f.submit :class =>"btn btn-primary", :value => "Add" %>
-    <% end %>
-  </div>
+  

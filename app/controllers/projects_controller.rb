@@ -21,8 +21,8 @@ class ProjectsController < ApplicationController
         if @project.save
             redirect_to project_path(@project.id), notice: "Project Successfully Created" 
         else 
-            redirect_to new_recipe_path
-            flash[:notice] = @recipe.errors.full_messages
+            redirect_to new_project_path
+            flash[:notice] = @project.errors.full_messages
             #render :new
         end    
     end

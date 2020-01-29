@@ -11,15 +11,6 @@ class Project < ApplicationRecord
     def materials_attributes=(material)
         self.material = Materials.find_or_create_by(name: category[:name])
         self.materials.update(material)
-        
-        # materials_attributes.values.each do |material_attribute|
-        #     material_name = material_attribute[:name]
-        #     material = Material.find_or_create_by(name: material_name)
-        #     if !material_name.empty? && material
-        #        self.materials << material unless self.material.include?(material)
-        #     end
-        #     self.save
-        #   end
     end
 
     def categories_attributes=(categories_attributes)

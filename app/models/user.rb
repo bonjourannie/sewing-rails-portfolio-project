@@ -8,29 +8,20 @@ class User < ApplicationRecord
   #has_secure_password 
   
 
-  validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
-  validates_presence_of :name, :email
-  validates_uniqueness_of :email
-  validates :password, presence: true, :length => {minimum: 6}
+  # validates_format_of :email,:with => /\A[^@\s]+@([^@\s]+\.)+[^@\s]+\z/
+  # validates_presence_of :name, :email
+  # validates_uniqueness_of :email
+  # validates :password, presence: true, :length => {minimum: 6}
 
   def self.from_omniauth(auth)
-    @user = User.from_omniauth(request.env["omniauth.auth"])
-
-    if @user.persisted?
-      sign_in_and_redirect @user, event: :authentication 
-      set_flash_message(:notice, :success, kind: "Github") if is_navigational_format?
-    else 
-      session["devise.github_data"] = request.env["omniauth.auth"]
-      redirect_to new_user_registration_url
-    # user = where(provider: auth.provider, uid: auth.uid).first 
-    #   unless user 
-    #     user = where(email: auth.info.email).first_or_initialize 
-    #     user.email = auth.info.email
-    #     user.name = auth.info.name 
-    #     user.password = Devise.friendly_token[0,20]
-    #     (user.save!(validate: false))
-    #   end
-    #   user
+    find_or_create_by(email: auth['info']['email']) do |u|
+       u.name = auth['info']['name']
+       u.email = auth['info']['email']
+       u.uid = auth['uid']
+       u.provider = auth['provider']
+       u.password = SecureRandom.hex(20)
+       u.password_confirmation = u.password
+       u.save
     end
   end
 
@@ -40,6 +31,11 @@ class User < ApplicationRecord
     
   def auth
     request.env["omniauth.auth"]
+  end
+
+  private 
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
 

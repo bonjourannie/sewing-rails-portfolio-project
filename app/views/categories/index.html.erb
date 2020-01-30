@@ -1,14 +1,18 @@
 <h1>All Categories</h1>
   <p><%= link_to 'Sort by Most Popular',sort_by_popularity_categories_path %></p>
   <p><%= link_to 'Sort by Name',sort_ABC_categories_path %></p>
-  <ul class="list-group">
-    <% @categories.each do |category| %>
-    <li class="list-group-item d-flex justify-content-between align-items-center">
-      <a href="#" class="load-projects" id="<%=category.id%>"><%= category.name %></a>
-      <span class="badge badge-primary badge-pill"><%= pluralize(category.project.count, "project") %></span>
-    </li>
-    <% end %>
-  </ul>
-  </div>
+  
+  <% @categories_projects.each do |category, projects| %>
+
+  <h2><%= category.name if category %></h2> 
+    <strong>Total: <%= pluralize(category.project.count, "Project") %></strong> 
+    <ul>
+        <% projects.each do |project| %>
+            <p>
+              <li><%= link_to project.name, category_project_path(project.category_id, project) %> </li>
+            </p>
+        <% end %>
+    </ul>
+<% end %>
 
   

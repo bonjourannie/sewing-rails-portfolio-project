@@ -32,10 +32,10 @@ class Project < ApplicationRecord
         end
     end
 
-    def ingredient_names 
-		self.recipe_ingredients.map(&:ingredient_id)
-		if ingredient_ids != ingredient_ids.uniq
-			self.errors.add(:recipe_ingredients, "Ingredient Name Should Appear Once!")
+    def material_names 
+		self.project_materials.map(&:material_id)
+		if material_ids != material_ids.uniq
+			self.errors.add(:project_materials, "Material Name Should Appear Once")
 		end
 	end
 

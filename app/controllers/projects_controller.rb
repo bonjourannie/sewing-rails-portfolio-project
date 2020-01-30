@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-    before_action :set_project, only: [:show, :edit, :update]
+    before_action :find_project, only: [:show, :edit, :update]
     
     def new 
         if current_user
@@ -32,7 +32,7 @@ class ProjectsController < ApplicationController
     
 
     def show 
-        if !logged_in?
+        if !current_user.present?
             redirect_to root_path 
             flash[:notice] = "you must be logged in to see projects"
         end
@@ -67,7 +67,7 @@ class ProjectsController < ApplicationController
         params.require(:project).permit(:name, :user_id, :instructions, materials_attributes: [:name, :id], categories_attributes: [:name], category_ids: [])
     end
 
-    def set_project
+    def find_project
         @project = Project.find(params[:id])
     end
     

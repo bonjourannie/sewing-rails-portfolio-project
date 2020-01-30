@@ -2,25 +2,20 @@ class ProjectsController < ApplicationController
     before_action :find_project, only: [:show, :edit, :update]
     
     def new 
-        if current_user
-            @project = Project.new 
-            4.times{@project.materials.build}
-        else 
-            redirect_to root_path
-            flash[:notice] = "Please log in to create a project"
+        @project = Project.new 
+        4.times do 
+            @project.project_materials.build.build_material
         end
     end
 
     def index
-        if params[:search]
-            @projects = Project.search(params[:search]) 
-        else 
-            @projects = Project.all
-        end 
+        @projects = Project.filter(params[:find_projects_by_name]).desc_listing
+        unless @projetcs.present?
+          redirect_to projects_path, notice: "Project Not Found"
+        end
     end
     
     def create 
-        #@project = Project.new(project_params)
         @project = current_user.projects.build(project_params)
         if @project.save
             redirect_to project_path(@project.id), notice: "Project Successfully Created" 
@@ -50,10 +45,10 @@ class ProjectsController < ApplicationController
     def update
         @project.update(project_params)
         if @project.save
-          render :show
+          redirect_to project_path(@project)
+          flash[:notice] = "Project successfully updated"
         else
           render :edit
-          # flash[:notice] = "There is an error here."
         end
     end
     
@@ -68,7 +63,7 @@ class ProjectsController < ApplicationController
     end
 
     def find_project
-        @project = Project.find(params[:id])
+        @project = Project.find_by(id: params[:id])
     end
     
 

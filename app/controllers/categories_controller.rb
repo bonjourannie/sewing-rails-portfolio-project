@@ -1,7 +1,9 @@
 class CategoriesController < ApplicationController
+    before_action :find_category, only: [:show, :edit, :update, :destroy]
+    
     def index 
         @catergories = Category.all 
-        @category = Category.new 
+        @categories_projects = Project.list_by_category 
     end
 
     def new 
@@ -38,20 +40,26 @@ class CategoriesController < ApplicationController
 
     def sort_by_popularity 
         @catergories = Category.sort_by_popularity 
-        @category = Category.new 
-        render :index
+        # @category = Category.new 
+        # render :index
     end 
 
     def sort_ABC 
         @catergories = Category.sort_ABC
-        @category = Category.new 
-        render :index 
+        # @category = Category.new 
+        # render :index 
     end
     
     private
+
     def category_params
         params.require(:category).permit(:name)
     end
+
+    def find_category
+        @category = Category.find_by(id: params[:id])
+    end
+    
 
         
 end

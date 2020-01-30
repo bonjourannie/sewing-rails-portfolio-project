@@ -8,3 +8,8 @@
 Category.create(name: "quilt")
 Category.create(name: "pants")
 Category.create(name: "dresses")
+Material.create(name: "felt")
+Material.create(name: "cotton")
+Material.create(name: "denim")
+
+

@@ -8,21 +8,9 @@ class Project < ApplicationRecord
     validates_presence_of :name, :materials, :instructions
     validates_uniqueness_of :name
 
-    scope :find_projetcs_by_name, -> (name) { where("name like ?", "#{name.capitalize}%")}
+    scope :find_projects_by_name, -> (name) { where("name like ?", "#{name.capitalize}%")}
 
-    def project_materials_attributes=(project_materials_hash)
-		project_materials_hash.values.each do |project_material|
-			project = Project.find_by(id: project_material[:project_id])
-			proj_material = ProjectMaterial.find_by(id: project_material[:id])
-			material = Material.find_by(id: project_material[:material_attributes][:id])
-			if project && proj_material && material
-				proj_material.update(amount: project_material[:amount])
-				material.update(name: project_material[:material_attributes][:name])
-			else
-				self.project_materials.build(project_material)
-			end
-		end
-	end
+    
 
     def categories_attributes=(categories_attributes)
         categories_attributes.values.each do |category_attribute|
@@ -32,12 +20,7 @@ class Project < ApplicationRecord
         end
     end
 
-    def material_names 
-		self.project_materials.map(&:material_id)
-		if material_ids != material_ids.uniq
-			self.errors.add(:project_materials, "Material Name Should Appear Once")
-		end
-	end
+
 
 	def self.list_by_category 
 		all.group_by(&:category)

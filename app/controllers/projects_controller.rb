@@ -4,14 +4,15 @@ class ProjectsController < ApplicationController
     def new 
         @project = Project.new 
         4.times do 
-            @project.project_materials.build.build_material
+            @project.project_materials.build
         end
     end
 
     def index
-        @projects = Project.filter(params[:find_projects_by_name]).desc_listing
-        unless @projetcs.present?
-          redirect_to projects_path, notice: "Project Not Found"
+        if params[:search]
+            @projects = Project.search(params[:search])
+        else
+            @projects = Project.all
         end
     end
     
@@ -59,7 +60,7 @@ class ProjectsController < ApplicationController
 
     private 
     def project_params
-        params.require(:project).permit(:name, :user_id, :instructions, materials_attributes: [:name, :id], categories_attributes: [:name], category_ids: [])
+        params.require(:project).permit(:name, :user_id, :instructions, materials_attributes: [:name, :id, :materials], categories_attributes: [:name], category_ids: [])
     end
 
     def find_project

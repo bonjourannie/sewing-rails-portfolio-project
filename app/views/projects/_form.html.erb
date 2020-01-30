@@ -12,16 +12,16 @@
   </div>
   <div class="form-group">
     <h4>Materials:</h4>
-         <%= f.fields_for :materials do |material_form| %>
+         <%= f.fields_for :project_materials do |material_form| %>
            <div>
-             <%= material_form.label :name %>
-             <%= material_form.text_field :name %><br>
-             <%= material_form.label :name %>
-             <%= material_form.text_field :name %><br>
-             <%= material_form.label :name %>
-             <%= material_form.text_field :name %><br>
-             <%= material_form.label :name %>
-             <%= material_form.text_field :name %>
+             <%= material_form.label :material %>
+             <%= material_form.text_field :material %><br>
+             <%= material_form.label :material %>
+             <%= material_form.text_field :material %><br>
+             <%= material_form.label :material %>
+             <%= material_form.text_field :material %><br>
+             <%= material_form.label :material %>
+             <%= material_form.text_field :material %>
            </div>
        <% end %>
   </div>

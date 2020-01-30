@@ -23,3 +23,5 @@
     <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", user_github_omniauth_authorize_path(resource_name, provider) %><br />
   <% end %>
 <% end %>
+
+<%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>

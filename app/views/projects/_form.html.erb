@@ -1,7 +1,7 @@
 <div>
   <div class="form-group">
-    <%= form_for @project do |f| %>
-    <% if @project.errors[:name].empty? %>
+    <%= form_for project do |f| %>
+    <% if project.errors[:name].empty? %>
       <%= f.label "Project Name", :class => "h4" %>
       <%= f.text_field :name  %>
     <% else %>
@@ -14,14 +14,10 @@
     <h4>Materials:</h4>
          <%= f.fields_for :project_materials do |material_form| %>
            <div>
-             <%= material_form.label :material %>
-             <%= material_form.text_field :material %><br>
-             <%= material_form.label :material %>
-             <%= material_form.text_field :material %><br>
-             <%= material_form.label :material %>
-             <%= material_form.text_field :material %><br>
-             <%= material_form.label :material %>
-             <%= material_form.text_field :material %>
+             <%= material_form.label :material_name %>
+             <%= material_form.text_field :material_name %>
+             <%= material_form.text_field :amount, placeholder: "Quantity (in yards)" %><br>
+            
            </div>
        <% end %>
   </div>
@@ -34,7 +30,7 @@
   <div class="form-group">
     <%= f.label "Categories", :class => "h4" %>
     <%= f.collection_check_boxes :category_ids, Category.all, :id, :name, :class => "form-check-label" %><br>
-    <%= f.fields_for :categories, @project.categories.build do |categories_field| %>
+    <%= f.fields_for :categories, project.categories.build do |categories_field| %>
       <br><%= f.label "And/or Create New Categories", :class => "h4" %>
       <%= categories_field.text_field :name %>
     <% end %>

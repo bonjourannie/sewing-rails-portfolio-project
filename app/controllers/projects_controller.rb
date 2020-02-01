@@ -6,6 +6,7 @@ class ProjectsController < ApplicationController
         4.times do 
             @project.project_materials.build
         end
+        
     end
 
     def index
@@ -19,6 +20,7 @@ class ProjectsController < ApplicationController
     def create 
         @project = current_user.projects.build(project_params)
         if @project.save
+            binding.pry
             redirect_to project_path(@project.id), notice: "Project Successfully Created" 
         else 
             redirect_to new_project_path
@@ -60,8 +62,8 @@ class ProjectsController < ApplicationController
 
     private 
     def project_params
-        params.require(:project).permit(:name, :user_id, :instructions, materials_attributes: [:name, :id, :materials], categories_attributes: [:name], category_ids: [])
-    end
+        params.require(:project).permit(:name, :instructions, :categories_attributes => [:name], :category_ids => [], :project_materials_attributes => [:material_name, :project_id, :amount])
+    end 
 
     def find_project
         @project = Project.find_by(id: params[:id])

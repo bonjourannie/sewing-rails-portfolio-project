@@ -5,7 +5,9 @@ class Project < ApplicationRecord
     has_many :category_projects
     has_many :categories, through: :category_projects
 
-    validates_presence_of :name, :materials, :instructions
+    accepts_nested_attributes_for :project_materials, reject_if: :all_blank
+
+    validates_presence_of :name, :instructions
     validates_uniqueness_of :name
 
     scope :find_projects_by_name, -> (name) { where("name like ?", "#{name.capitalize}%")}
@@ -15,7 +17,7 @@ class Project < ApplicationRecord
     def categories_attributes=(categories_attributes)
         categories_attributes.values.each do |category_attribute|
             if !category_attribute[:name].empty? && category = Category.find_or_create_by(category_attribute)
-                self.categories.update(categories_attributes) 
+                self.categories << category
             end
         end
     end

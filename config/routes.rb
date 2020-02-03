@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get '/users/:user_id/projects', to: 'users#projects'
   
   get '/materials/sort_abc', to: 'materials#sort_ABC'
-  get '/materials/sort_by_popularity', to: 'materials#sort_bypopularity'
+  get '/materials/sort_by_popularity', to: 'materials#sort_by_popularity'
 
   resources :materials, only: [:index, :show]
   

@@ -10,12 +10,12 @@ class MaterialsController < ApplicationController
 
     def sort_by_popularity 
         @materials = Material.sort_by_popularity
-        # render :index 
+        render :index 
     end
 
     def sort_ABC 
         @materials = Material.sort_ABC 
-        # render :index 
+        render :index 
     end
 
 

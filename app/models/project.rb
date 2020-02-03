@@ -25,7 +25,7 @@ class Project < ApplicationRecord
 
 
 	def self.list_by_category 
-		all.group_by(&:category)
+		all.group_by(&:category_id)
 	end
 	
 	def self.desc_listing

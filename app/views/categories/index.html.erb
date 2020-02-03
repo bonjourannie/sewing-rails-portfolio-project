@@ -1,18 +1,10 @@
 <h1>All Categories</h1>
-  <p><%= link_to 'Sort by Most Popular', sort_by_popularity_categories_path %></p>
-  <p><%= link_to 'Sort by Name', sort_ABC_categories_path %></p>
-  
-  <% @categories_projects.each do |category, projects| %>
+<p><%= link_to 'Sort by Most Popular', sort_by_popularity_categories_path %></p>
+<p><%= link_to 'Sort by Name', sort_ABC_categories_path %></p>
 
-  <h2><%= category.name if category %></h2> 
-    <strong>Total: <%= pluralize(category.project.count, "Project") %></strong> 
-    <ul>
-        <% projects.each do |project| %>
-            <p>
-              <li><%= link_to project.name, category_project_path(project.category_id, project) %> </li>
-            </p>
-        <% end %>
-    </ul>
-<% end %>
-
-  
+<% @categories.each do |category| %>
+        <ul>
+            <strong><%= category.name %></strong> <%= link_to "show projects in this category", category_path(category) %> 
+        </ul>              
+    
+<% end %> <br> <br>

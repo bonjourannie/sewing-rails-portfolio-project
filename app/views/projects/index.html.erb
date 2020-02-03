@@ -1,9 +1,4 @@
-<% if @projects.blank? %>
-  <h4>There are no projects containing the material <%= params[:search] %>.</h4>
-  
-    
+
     <%= link_to "Create a project", new_project_path %>
    
-    and start sewing!</h4>
   <%= render 'all_projects' %>
-<% end %>

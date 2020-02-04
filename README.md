@@ -1,24 +1,10 @@
-# README
+Create a user account at /signup, or log in with GitHub at . Then browse sewing projects and create/edit your own projects. 
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+When browsing categories, you can sort by name or most popular. Users can also view the number of recipes for each category, and view all recipes that fall under that category. 
 
-Things you may want to cover:
+For materials, users can see how many projects use that material from the index page. Click the material to see all projects that contain the ingredient. 
 
-* Ruby version
+To run on local system using web browser, fork and clone the repository, run bundle install, rails db:migrate, rails db:seed
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Contributing
+The app is available as open source under the terms of the MIT License.

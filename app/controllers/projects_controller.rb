@@ -23,20 +23,15 @@ class ProjectsController < ApplicationController
             #binding.pry
             redirect_to project_path(@project.id), notice: "Project Successfully Created" 
         else 
-            redirect_to new_project_path
             flash[:notice] = @project.errors.full_messages
+            render :new
         end    
     end
     
 
-    def show 
-        # if !current_user.present?
-        #     redirect_to root_path 
-        #     flash[:notice] = "you must be logged in to see projects"
-        # end
-        # @project = Project.find_by(:id params[:id])
-        # binding.pry
-    end
+    def show
+        redirect_to projects_path, notice: "Record not found" if @project.nil?
+      end 
 
     def edit
         if @project.user == current_user
@@ -68,7 +63,7 @@ class ProjectsController < ApplicationController
     end 
 
     def find_project
-        @project = Project.find_by(id: params[:category_id])
+        @project = Project.find_by(id: params[:id])
     end
     
 

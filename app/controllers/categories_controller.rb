@@ -22,8 +22,9 @@ class CategoriesController < ApplicationController
       end 
 
     def show 
-        @category = Category.find(params[:id])
-        @project = @category.category_projects
+        @category = Category.find_by(id: params[:id])
+        #@project = @category.project_materials
+        
     end
 
     def edit 
@@ -61,7 +62,7 @@ class CategoriesController < ApplicationController
     end
 
     def find_category
-        @category = Category.find_by(id: params[:catecory_id])
+        @category = Category.find_by(id: params[:id])
     end
     
 

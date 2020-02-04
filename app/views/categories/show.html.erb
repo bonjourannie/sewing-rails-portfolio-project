@@ -1,7 +1,6 @@
 <h1> <%= @category.name %> </h1>
 <ul>
-<%= link_to @category.name, project_path(project) %></li>
-</ul>
+<strong><%= link_to @category.name, project_path %></strong>
 
 
 <p><%= link_to 'See All Categories', categories_path %></p>

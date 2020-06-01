@@ -1,6 +1,6 @@
 Create a user account at /signup, or log in with GitHub at . Then browse sewing projects and create/edit your own projects. 
 
-When browsing categories, you can sort by name or most popular. Users can also view the number of recipes for each category, and view all recipes that fall under that category. 
+When browsing categories, you can sort by name or most popular. Users can also view the number of projects for each category, and view all recipes that fall under that category. 
 
 For materials, users can see how many projects use that material from the index page. Click the material to see all projects that contain the ingredient. 
 
